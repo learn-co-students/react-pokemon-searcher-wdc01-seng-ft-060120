@@ -5,7 +5,7 @@ const Search = props => {
     <div className="ui search">
       <div className="ui icon input">
         <input 
-          onChange={ props.updateSearchTerm }
+          onChange={ event => props.updateSearchTerm( event.target.value ) }
           className="prompt"/>
         <i className="search icon" />
       </div>

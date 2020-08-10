@@ -21,13 +21,13 @@ const PokemonForm = props => {
             placeholder="hp"
             name="hp" />
           <Form.Input
-            onChange={ event => props.updateNewPokemonImages( event ) }
+            onChange={ event => props.updateNewPokemonInfo( event ) }
             fluid
             label="Front Image URL"
             placeholder="url"
             name="frontUrl" />
           <Form.Input
-            onChange={ event => props.updateNewPokemonImages( event ) }
+            onChange={ event => props.updateNewPokemonInfo( event ) }
             fluid
             label="Back Image URL"
             placeholder="url"

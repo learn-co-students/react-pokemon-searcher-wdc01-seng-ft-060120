@@ -1342,49 +1342,13 @@
       }
     },
     {
-      "name": "name",
-      "hp": 33,
+      "name": "Pokemon Clone",
+      "hp": 88,
       "sprites": {
-        "frontUrl": "frontURL",
-        "backUrl": "backURL"
+        "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/138.png",
+        "back": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/138.png"
       },
       "id": 151
-    },
-    {
-      "name": "another pokemon",
-      "hp": 55,
-      "sprites": {
-        "frontUrl": "frontURL",
-        "backUrl": "backURl"
-      },
-      "id": 152
-    },
-    {
-      "name": "another pokemon",
-      "hp": 55,
-      "sprites": {
-        "frontUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
-        "backUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/151.png"
-      },
-      "id": 153
-    },
-    {
-      "name": "my pokemon",
-      "hp": 11,
-      "sprites": {
-        "frontUrl": "front",
-        "backUrl": "back"
-      },
-      "id": 154
-    },
-    {
-      "name": "another one",
-      "hp": 99,
-      "sprites": {
-        "frontUrl": "fr",
-        "backUrl": "ba"
-      },
-      "id": 155
     }
   ]
 }

@@ -13,12 +13,10 @@ class PokemonPage extends React.Component {
     newPokemon: {
       name: '',
       hp: 0,
-      sprites: {
-        frontUrl: '',
-        backUrl: ''
+      frontUrl: '',
+      backUrl: '',
       }
     }
-  }
 
   updateNewPokemonInfo = event => {
     let { name, value } = event.target
@@ -34,22 +32,9 @@ class PokemonPage extends React.Component {
     })
   }
 
-  updateNewPokemonImages = event => {
-    let { name, value } = event.target
-
-    this.setState({
-      newPokemon: {
-        ...this.state.newPokemon,
-        sprites:{
-          ...this.state.newPokemon.sprites,
-          [name]: value
-        }
-      }
-    })
-  }
-
   makeNewPokemon = event => {
     event.target.reset()
+    let { name, hp, frontUrl, backUrl } = this.state.newPokemon
     
     const postRequest = {
       method: 'POST',
@@ -57,7 +42,14 @@ class PokemonPage extends React.Component {
         'Content-Type': 'application/json',
         'Accepts': 'application/json'
       },
-      body: JSON.stringify( this.state.newPokemon )
+      body: JSON.stringify( {
+        name: name,
+        hp: hp,
+        sprites: {
+          front: frontUrl,
+          back: backUrl
+        }
+      } )
     }
 
     fetch('http://localhost:3000/pokemon/', postRequest)
@@ -73,25 +65,26 @@ class PokemonPage extends React.Component {
 
   toggleImage = pokemon => {
     let newList = this.state.pokemonList.map( p => {
-        if ( p === pokemon ) {
-          p.isClicked = !p.isClicked
-          return p
-        } else {
-          return p
-        }
+      // console.log(p)
+      // console.log(( p === pokemon ) ? {...p, isClicked: !p.isClicked} : p)
+      // console.log(this.state.pokemonList)
+      // ( p === pokemon ) ? {...pokemon, isClicked: !p.isClicked} : p
+      if ( p === pokemon ) {
+        p.isClicked = !p.isClicked
+        return p
+      }
+      return p
     })
     this.setState({
       pokemonList: newList
     })
   }
 
-  updateSearchTerm = event => {
-    this.setState({ searchTerm: event.target.value })
-  }
+  updateSearchTerm = searchTerm => this.setState({ searchTerm })
 
-  handlePokemonSearch = () => {
+  calculateDisplayPokemons = () => {
     let { searchTerm, pokemonList } = this.state
-    return pokemonList.filter( p => p.name.includes(searchTerm) )
+    return pokemonList.filter( p => p.name.toLowerCase().includes(searchTerm.toLowerCase()) )
   }
 
   render() {
@@ -101,7 +94,6 @@ class PokemonPage extends React.Component {
         <br />
         <PokemonForm
           updateNewPokemonInfo={this.updateNewPokemonInfo}
-          updateNewPokemonImages={this.updateNewPokemonImages}
           makeNewPokemon={this.makeNewPokemon}
         />
         <br />
@@ -110,7 +102,7 @@ class PokemonPage extends React.Component {
         />
         <br />
         <PokemonCollection
-          pokemonList={this.handlePokemonSearch()}
+          pokemonList={this.calculateDisplayPokemons()}
           toggleImage={this.toggleImage}
         />
       </Container>

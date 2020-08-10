@@ -2,8 +2,7 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 
 class PokemonForm extends React.Component {
-
-  state= {
+  DefaultState = {
     name: "",
     hp: "",
     sprites: {
@@ -11,6 +10,8 @@ class PokemonForm extends React.Component {
       back: "",
     }
   }
+
+  state= this.DefaultState
 
   nameChange = (name) => {
     this.setState({
@@ -50,7 +51,10 @@ class PokemonForm extends React.Component {
     return (
       <div>
         <h3>Add a Pokemon!</h3>
-        <Form onSubmit={(e) => {createPokemon(e, this.state)}}>
+        <Form onSubmit={(e) => {
+          createPokemon(e, this.state)
+          this.setState(this.DefaultState)
+          }}>
           <Form.Group widths="equal">
             <Form.Input fluid label="Name" placeholder="Name" name="name" value={this.state.name} onChange={(e) => {this.nameChange(e.target.value)}}/>
             <Form.Input fluid label="hp" placeholder="hp" name="hp" value={this.state.hp} onChange={(e) => {this.hpChange(e.target.value)}}/>

@@ -10,6 +10,7 @@ class PokemonPage extends React.Component {
 
   state = {
     pokemon: [],
+    displayPokemon: [],
   }
 
   componentDidMount(){
@@ -17,7 +18,8 @@ class PokemonPage extends React.Component {
     .then(resp => resp.json())
     .then(pokemon => {
       this.setState({
-        pokemon
+        pokemon: pokemon,
+        displayPokemon: pokemon
       })
     })
   }
@@ -36,8 +38,16 @@ class PokemonPage extends React.Component {
     .then(resp => resp.json())
     .then(poke => {
       this.setState({
-        pokemon: [poke, ...this.state.pokemon]
+        pokemon: [poke, ...this.state.pokemon],
+        displayPokemon: [poke, ...this.state.pokemon]
       })
+    })
+  }
+
+  searchPokemon = (searchTerm) => {
+    let displayPokemon = [...this.state.pokemon].filter(pokemon => pokemon.name.includes(searchTerm))
+    this.setState({
+      displayPokemon
     })
   }
 
@@ -48,9 +58,9 @@ class PokemonPage extends React.Component {
         <br />
         <PokemonForm createPokemon={this.createPokemon}/>
         <br />
-        <Search />
+        <Search searchPokemon={this.searchPokemon}/>
         <br />
-        <PokemonCollection pokemon={this.state.pokemon} />
+        <PokemonCollection pokemon={this.state.displayPokemon} />
       </Container>
     )
   }
